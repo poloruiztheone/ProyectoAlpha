@@ -16,12 +16,23 @@ import java.net.SocketException;
  *
  * @author JGUTIERRGARC
  */
-public class Cliente {
-    public static void main(String args[]){ 
+public class Cliente extends FrmCliente{
+    
+    
+    public static void main(String args[]){
+        
   	byte [] mensaje= new byte[1000];
         byte [] monstruo;
         boolean juegoFinalizado =false;
 	MulticastSocket s =null;
+        
+        //iniciar el jFrame
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new FrmCliente().setVisible(true);
+            }
+        });
+        
    	try {              
             // Unirse al grupo Multicast
             InetAddress group = InetAddress.getByName("228.5.6.7"); // destination multicast group 
@@ -45,6 +56,8 @@ public class Cliente {
                      s.receive(messageIn);
                      monstruo= (new String(messageIn.getData())).getBytes();
                      System.out.println("Recibi un monstruo en: "+ (new String(monstruo)));
+                     jLabel1.setText("Recibi un monstruo en: "+ (new String(monstruo)));
+                     
                      /* Mandar mensaje al servidor pegandole al monstruo */
                      // Aqui modificar para que se mande mensaje de si le pego y donde le pego segun la interfaz de usuario(Si no dio tiempo de pegar mandar -1,-1.
                      
