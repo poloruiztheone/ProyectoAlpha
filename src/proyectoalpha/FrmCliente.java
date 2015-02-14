@@ -11,12 +11,57 @@ package proyectoalpha;
  */
 public class FrmCliente extends javax.swing.JFrame {
 
+    //Matriz para controlar la aparicion del monstruo
+    protected static javax.swing.JLabel[][] image_matrix;
+    private int filaMonstruo = -1;
+    private int columnaMonstruo = -1;
+    
     /**
      * Creates new form FrmCliente
      */
     public FrmCliente() {
         initComponents();
+        initImageMatrix();
+                //iniciar el jFrame
+
     }
+    
+    protected void putMonstruo(int fila, int columna)
+    {
+        if (filaMonstruo != -1 && columnaMonstruo != -1)
+        {
+            image_matrix[filaMonstruo][columnaMonstruo].setIcon((new javax.swing.ImageIcon(getClass().getResource("/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"))));
+        }
+        image_matrix[fila][columna].setIcon((new javax.swing.ImageIcon(getClass().getResource("/proyectoalpha/monstruos-sa-1 2copia.gif"))));
+        filaMonstruo = fila;
+        columnaMonstruo = columna;
+    }
+    
+    protected void refresh()
+    {
+        for (int i = 0; i < image_matrix.length; i++)
+        {
+            for (int j = 0; j < image_matrix[i].length; j++)
+            {
+                
+                image_matrix[i][j].revalidate();
+                image_matrix[i][j].repaint();
+            }
+        }
+
+        
+    }
+    
+    //La propiedad icon de todos los jlabel ya tienen asignada la imagen del agujero
+    private void initImageMatrix(){
+        image_matrix = new javax.swing.JLabel[][]{
+            { im_0_0, im_0_1, im_0_2, im_0_3 },
+            { im_1_0, im_1_1, im_1_2, im_1_3 },
+            { im_2_0, im_2_1, im_2_2, im_2_3 },
+            { im_3_0, im_3_1, im_3_2, im_3_3 }
+        };
+    }
+            
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,27 +72,128 @@ public class FrmCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        im_0_0 = new javax.swing.JLabel();
+        im_0_1 = new javax.swing.JLabel();
+        im_0_3 = new javax.swing.JLabel();
+        im_0_2 = new javax.swing.JLabel();
+        im_1_3 = new javax.swing.JLabel();
+        im_1_1 = new javax.swing.JLabel();
+        im_1_0 = new javax.swing.JLabel();
+        im_1_2 = new javax.swing.JLabel();
+        im_3_1 = new javax.swing.JLabel();
+        im_2_3 = new javax.swing.JLabel();
+        im_2_1 = new javax.swing.JLabel();
+        im_2_0 = new javax.swing.JLabel();
+        im_3_3 = new javax.swing.JLabel();
+        im_2_2 = new javax.swing.JLabel();
+        im_3_0 = new javax.swing.JLabel();
+        im_3_2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("jLabel1");
+        im_0_0.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"))); // NOI18N
+
+        im_0_1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"))); // NOI18N
+
+        im_0_3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"))); // NOI18N
+
+        im_0_2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"))); // NOI18N
+
+        im_1_3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"))); // NOI18N
+
+        im_1_1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"))); // NOI18N
+
+        im_1_0.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"))); // NOI18N
+
+        im_1_2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"))); // NOI18N
+
+        im_3_1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"))); // NOI18N
+
+        im_2_3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"))); // NOI18N
+
+        im_2_1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"))); // NOI18N
+
+        im_2_0.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"))); // NOI18N
+
+        im_3_3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"))); // NOI18N
+
+        im_2_2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"))); // NOI18N
+
+        im_3_0.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"))); // NOI18N
+
+        im_3_2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel1)
-                .addContainerGap(337, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(im_3_0)
+                            .addGap(18, 18, 18)
+                            .addComponent(im_3_1)
+                            .addGap(18, 18, 18)
+                            .addComponent(im_3_2)
+                            .addGap(18, 18, 18)
+                            .addComponent(im_3_3))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(im_2_0)
+                            .addGap(18, 18, 18)
+                            .addComponent(im_2_1)
+                            .addGap(18, 18, 18)
+                            .addComponent(im_2_2)
+                            .addGap(18, 18, 18)
+                            .addComponent(im_2_3)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(im_1_0)
+                            .addGap(18, 18, 18)
+                            .addComponent(im_1_1)
+                            .addGap(18, 18, 18)
+                            .addComponent(im_1_2)
+                            .addGap(18, 18, 18)
+                            .addComponent(im_1_3))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(im_0_0)
+                            .addGap(18, 18, 18)
+                            .addComponent(im_0_1)
+                            .addGap(18, 18, 18)
+                            .addComponent(im_0_2)
+                            .addGap(18, 18, 18)
+                            .addComponent(im_0_3))))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jLabel1)
-                .addContainerGap(248, Short.MAX_VALUE))
+                .addGap(46, 46, 46)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(im_0_3)
+                    .addComponent(im_0_1)
+                    .addComponent(im_0_0)
+                    .addComponent(im_0_2))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(im_1_3)
+                    .addComponent(im_1_1)
+                    .addComponent(im_1_0)
+                    .addComponent(im_1_2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(im_2_3)
+                    .addComponent(im_2_1)
+                    .addComponent(im_2_0)
+                    .addComponent(im_2_2))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(im_3_3)
+                    .addComponent(im_3_1)
+                    .addComponent(im_3_0)
+                    .addComponent(im_3_2))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -89,6 +235,21 @@ public class FrmCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    protected static javax.swing.JLabel jLabel1;
+    protected static javax.swing.JLabel im_0_0;
+    protected static javax.swing.JLabel im_0_1;
+    protected static javax.swing.JLabel im_0_2;
+    protected static javax.swing.JLabel im_0_3;
+    protected static javax.swing.JLabel im_1_0;
+    protected static javax.swing.JLabel im_1_1;
+    protected static javax.swing.JLabel im_1_2;
+    protected static javax.swing.JLabel im_1_3;
+    protected static javax.swing.JLabel im_2_0;
+    protected static javax.swing.JLabel im_2_1;
+    protected static javax.swing.JLabel im_2_2;
+    protected static javax.swing.JLabel im_2_3;
+    protected static javax.swing.JLabel im_3_0;
+    protected static javax.swing.JLabel im_3_1;
+    protected static javax.swing.JLabel im_3_2;
+    protected static javax.swing.JLabel im_3_3;
     // End of variables declaration//GEN-END:variables
 }

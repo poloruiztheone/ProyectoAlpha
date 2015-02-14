@@ -18,6 +18,20 @@ import java.net.SocketException;
  */
 public class Cliente extends FrmCliente{
     
+    public static Cliente c = new Cliente();
+    
+    /***
+     * Separa las coordenadas, las convierte en enteros y pinta un monstruo en esa posición
+     * @param pos Coordenadas enviadas por el servidor en formato <n,m>
+     */
+    public static void pintaMonstruo(String pos){
+        pos = pos.trim();
+        String coord[] = pos.split(",");
+        Integer fila = Integer.parseInt(coord[0]);
+        Integer columna = Integer.parseInt(coord[1]);
+        c.putMonstruo(fila, columna);
+        c.refresh();
+    }
     
     public static void main(String args[]){
         
@@ -29,7 +43,8 @@ public class Cliente extends FrmCliente{
         //iniciar el jFrame
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmCliente().setVisible(true);
+                c.setVisible(true);
+
             }
         });
         
@@ -56,7 +71,10 @@ public class Cliente extends FrmCliente{
                      s.receive(messageIn);
                      monstruo= (new String(messageIn.getData())).getBytes();
                      System.out.println("Recibi un monstruo en: "+ (new String(monstruo)));
-                     jLabel1.setText("Recibi un monstruo en: "+ (new String(monstruo)));
+                     
+                    //Dibuja un monstruo en la posicion recibida por el servidor
+                    String pos = new String(monstruo);
+                    pintaMonstruo(pos);
                      
                      /* Mandar mensaje al servidor pegandole al monstruo */
                      // Aqui modificar para que se mande mensaje de si le pego y donde le pego segun la interfaz de usuario(Si no dio tiempo de pegar mandar -1,-1.

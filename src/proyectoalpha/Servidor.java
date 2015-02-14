@@ -64,7 +64,7 @@ public class Servidor {
 //                }
                 // Esperar 30 seg antes de mandar otro monstruo.
                 try {
-                    Thread.sleep(30000);
+                    Thread.sleep(10000);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
                 }
