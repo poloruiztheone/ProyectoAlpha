@@ -67,7 +67,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="20" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -113,6 +113,8 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="hoyo"/>
+        <Property name="verticalTextPosition" type="int" value="1"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="12"/>
@@ -123,6 +125,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="hoyo"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="12"/>
@@ -133,6 +136,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="hoyo"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="12"/>
@@ -143,6 +147,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="hoyo"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="12"/>
@@ -153,6 +158,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="hoyo"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="12"/>
@@ -163,6 +169,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="hoyo"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="12"/>
@@ -173,6 +180,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="hoyo"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="12"/>
@@ -183,6 +191,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="hoyo"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="12"/>
@@ -193,6 +202,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="hoyo"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="12"/>
@@ -203,6 +213,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="hoyo"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="12"/>
@@ -213,6 +224,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="hoyo"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="12"/>
@@ -223,6 +235,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="hoyo"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="12"/>
@@ -233,6 +246,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="hoyo"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="12"/>
@@ -243,6 +257,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="hoyo"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="12"/>
@@ -253,6 +268,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="hoyo"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="12"/>
@@ -263,6 +279,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="hoyo"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="12"/>

@@ -11,6 +11,12 @@ import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.net.SocketException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -19,6 +25,10 @@ import java.net.SocketException;
 public class Cliente extends FrmCliente{
     
     public static Cliente c = new Cliente();
+    
+    public Cliente(){
+      super();
+    }
     
     /***
      * Separa las coordenadas, las convierte en enteros y pinta un monstruo en esa posición
@@ -77,6 +87,9 @@ public class Cliente extends FrmCliente{
                     pintaMonstruo(pos);
                      
                      /* Mandar mensaje al servidor pegandole al monstruo */
+                    
+                     // HRG: El mensaje se debe mandar en el método onMonster Click de esta clase
+                    
                      // Aqui modificar para que se mande mensaje de si le pego y donde le pego segun la interfaz de usuario(Si no dio tiempo de pegar mandar -1,-1.
                      
                      // Si el juego termino el servidor manda mensaje "Finalizo" y el ganador
@@ -111,4 +124,14 @@ public class Cliente extends FrmCliente{
            if(s != null) s.close();
        }
     }		     
+
+    
+    @Override
+    /***
+     * Aquí tenemos que programar la respuesta al servidor TCP.
+     */
+    protected void onMonsterClick() {
+        JOptionPane.showMessageDialog(null, "Te madreaste al monstruo" );
+        System.out.println("Está super cool");
+    }
 }
