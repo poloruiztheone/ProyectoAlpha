@@ -3,24 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
 package proyectoalpha;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.InetAddress;
-import java.net.MulticastSocket;
-import java.net.SocketException;
+import java.net.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
 /**
  *
- * @author JGUTIERRGARC
+ * @author Fer Bonnin, Hipolito
  */
 public class Cliente extends FrmCliente{
     
@@ -43,12 +49,17 @@ public class Cliente extends FrmCliente{
         c.refresh();
     }
     
-    public static void main(String args[]){
+    public static void main(String args[]) throws IOException{ 
         
+        // Variables 
   	byte [] mensaje= new byte[1000];
         byte [] monstruo;
         boolean juegoFinalizado =false;
+        
+        // Variables Multicast
 	MulticastSocket s =null;
+                
+
         
         //iniciar el jFrame
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -58,23 +69,18 @@ public class Cliente extends FrmCliente{
             }
         });
         
-   	try {              
+   	try {      
+            /*UDP*/
             // Unirse al grupo Multicast
             InetAddress group = InetAddress.getByName("228.5.6.7"); // destination multicast group 
             s = new MulticastSocket(6789);
             s.joinGroup(group); 
-            
+
             // Mientras no haya finalizado el juego
             while(!juegoFinalizado){
-//                // Creacion del mensaje
-//                String myMessage="Dame la hora";
                
 //	    	DatagramPacket messageOut = new DatagramPacket(m, m.length, group, 6789);
                 DatagramPacket messageIn = new DatagramPacket(mensaje, mensaje.length);
-                // Como es multicast, lo que esta enviando lo escuchan todos, es decir, se escucha a si mismo tambien al enviar un mensaje
-                // Por eso ponemos que escuche su mismo mensaje (aunque no lo utilicemos).
-//	    	s.send(messageOut);
-//                s.receive(messageIn2);
                 
                 /* Escuchar y recibir un monstruo*/
                 try {                    
@@ -91,7 +97,7 @@ public class Cliente extends FrmCliente{
                      // HRG: El mensaje se debe mandar en el método onMonster Click de esta clase
                     
                      // Aqui modificar para que se mande mensaje de si le pego y donde le pego segun la interfaz de usuario(Si no dio tiempo de pegar mandar -1,-1.
-                     
+                     /*UDP*/
                      // Si el juego termino el servidor manda mensaje "Finalizo" y el ganador
                      if(new String(monstruo).compareTo("Finalizo")==0){
                          juegoFinalizado=true;
@@ -100,14 +106,10 @@ public class Cliente extends FrmCliente{
                         monstruo= (new String(messageIn.getData())).getBytes();
                         System.out.println("El ganador fue: "+ (new String(monstruo)));
                      }
-                     
-                     // Sino, pegarle al monstruo y mandar el mensaje adecuado al servidor VIA SOCKET, no Multicast
-                     else{
-                         
-                     }
+                      
                      
                 } catch (IOException e) {
-                    System.out.println("Error: " + e.getMessage());
+                    System.out.println("Error Lec: " + e.getMessage());
                 }
             }   
             // Salir del grupo
@@ -122,16 +124,32 @@ public class Cliente extends FrmCliente{
         // Cerrar el socket
         finally {
            if(s != null) s.close();
+           
        }
     }		     
 
     
     @Override
     /***
-     * Aquí tenemos que programar la respuesta al servidor TCP.
+     * Pegarle al monstruo y mandar el mensaje adecuado al servidor VIA SOCKET
      */
+    /*TCP*/
+
     protected void onMonsterClick() {
-        JOptionPane.showMessageDialog(null, "Te madreaste al monstruo" );
-        System.out.println("Está super cool");
+                // Variables TCP
+        Socket stcp = null;
+        int serverPort = 7896;
+        
+        try {    
+            stcp = new Socket("localhost", serverPort);
+            DataOutputStream out = new DataOutputStream( stcp.getOutputStream());
+            out.writeUTF("le pegue a monstruo");
+            if(stcp != null) stcp.close();
+            //JOptionPane.showMessageDialog(null, "Le pegaste al monstruo" );
+            System.out.println("Le pegaste al monstruo");
+        } catch (IOException ex) {
+            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 }
