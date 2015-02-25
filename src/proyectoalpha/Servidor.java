@@ -35,6 +35,19 @@ public class Servidor {
         ServerSocketChannel ssc = null;
         
    	try {
+            /*TCP*/
+            ssc = ServerSocketChannel.open();
+            ssc.socket().bind(new InetSocketAddress(serverPort));
+            //ssc.configureBlocking(false);
+            
+            SocketChannel sc = ssc.accept();
+
+            
+            System.out.println("Se conecta al juego " + sc.socket().getRemoteSocketAddress());                    
+            Connection c = new Connection(sc.socket());
+            c.start();
+            //sc = ssc.accept();
+            //c.join();
             
             // Unirse al grupo Multicast.
             InetAddress group = InetAddress.getByName("228.5.6.7"); // destination multicast group 
@@ -42,10 +55,7 @@ public class Servidor {
             s.joinGroup(group); 
             buffer = new byte[1000];
            
-            /*TCP*/
-             ssc = ServerSocketChannel.open();
-            ssc.socket().bind(new InetSocketAddress(serverPort));
-            ssc.configureBlocking(false);
+
             
             // Siempre esta en ejecucion.
             while(true) {
@@ -55,7 +65,7 @@ public class Servidor {
 
                 /* Mandar un nuevo monstruo. */
                 // Obtener posicion aleatoria para el monstruo
-                PosMonstruo= posicionAleatoria();
+                PosMonstruo = posicionAleatoria();
                 byte [] monstruo = PosMonstruo.getBytes();
                 DatagramPacket messageOut = new DatagramPacket(monstruo,monstruo.length, group, 6789);
                 s.send(messageOut);
@@ -67,7 +77,8 @@ public class Servidor {
                 /*Escuchar las respuestas y esperar 30 segundos antes de mandar otro monstruo*/
                 try {                   
                     // Para TCP : non blocking Socket  ( el visto en clase se bloquea hasta que hay una conexion)
-                    SocketChannel sc = ssc.accept();
+
+                    sc = ssc.accept();
                     /*Escuchar respuestas*/
                     // Aqui modificar:
                     // 1) el while tiene que ser en un lapso de tiempo (no hasta que contesten todos) y cuando ya conteste alguien
@@ -79,12 +90,12 @@ public class Servidor {
                         // 3) mandar feedback al cliente. 
                    while(sc!=null){
                         System.out.println("Received an incoming connection from " + sc.socket().getRemoteSocketAddress());                    
-                        Connection c = new Connection(sc.socket());
+                        c = new Connection(sc.socket());
                         c.start();
                         sc = ssc.accept();
                    }
                    Thread.sleep(3000);
-                    
+                   System.out.println("Aqui se debe enviar, quien le pego primero y el score");
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -95,7 +106,7 @@ public class Servidor {
 	 }
          catch (IOException e){
              System.out.println("IO: " + e.getMessage());
-         }
+         } 
         // Cerrar el socket Multicast
 	 finally {
             if(s != null) s.close();

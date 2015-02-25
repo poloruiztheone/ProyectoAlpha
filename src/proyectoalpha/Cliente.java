@@ -19,6 +19,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -58,8 +59,9 @@ public class Cliente extends FrmCliente{
         
         // Variables Multicast
 	MulticastSocket s =null;
-                
-
+        Scanner lee = new Scanner(System.in);
+        System.out.println("Nombre de jugador:");
+        buscarJuego(lee.next());
         
         //iniciar el jFrame
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -129,12 +131,33 @@ public class Cliente extends FrmCliente{
     }		     
 
     
-    @Override
-    /***
+
+
+    private static void buscarJuego(String userName){
+        Socket stcp = null;
+        int serverPort = 7896;
+        
+        try {    
+            stcp = new Socket("localhost", serverPort);
+            DataOutputStream out = new DataOutputStream( stcp.getOutputStream());
+            out.writeUTF(userName);
+            
+            
+            if(stcp != null) stcp.close();
+            //JOptionPane.showMessageDialog(null, "Le pegaste al monstruo" );
+            System.out.println("Te conectaste al juego");
+        } catch (IOException ex) {
+            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+     /***
      * Pegarle al monstruo y mandar el mensaje adecuado al servidor VIA SOCKET
      */
     /*TCP*/
-
+    
+    @Override
     protected void onMonsterClick() {
                 // Variables TCP
         Socket stcp = null;
