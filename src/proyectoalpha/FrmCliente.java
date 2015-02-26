@@ -35,7 +35,7 @@ public abstract class FrmCliente extends javax.swing.JFrame {
     {
         if (filaMonstruo != -1 && columnaMonstruo != -1)
         {
-            image_matrix[fila][columna].setToolTipText("hoyo");
+            image_matrix[filaMonstruo][columnaMonstruo].setToolTipText("hoyo");
             image_matrix[filaMonstruo][columnaMonstruo].setIcon((new javax.swing.ImageIcon(getClass().getResource("/proyectoalpha/hole-in-the-wall.png.625x385_q100.png"))));
         }
         image_matrix[fila][columna].setToolTipText("monstruo");
@@ -113,6 +113,7 @@ public abstract class FrmCliente extends javax.swing.JFrame {
         im_2_2 = new javax.swing.JLabel();
         im_3_0 = new javax.swing.JLabel();
         im_3_2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -171,47 +172,51 @@ public abstract class FrmCliente extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(im_3_0)
-                            .addGap(18, 18, 18)
-                            .addComponent(im_3_1)
-                            .addGap(18, 18, 18)
-                            .addComponent(im_3_2)
-                            .addGap(18, 18, 18)
-                            .addComponent(im_3_3))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(im_2_0)
-                            .addGap(18, 18, 18)
-                            .addComponent(im_2_1)
-                            .addGap(18, 18, 18)
-                            .addComponent(im_2_2)
-                            .addGap(18, 18, 18)
-                            .addComponent(im_2_3)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(im_1_0)
-                            .addGap(18, 18, 18)
-                            .addComponent(im_1_1)
-                            .addGap(18, 18, 18)
-                            .addComponent(im_1_2)
-                            .addGap(18, 18, 18)
-                            .addComponent(im_1_3))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(im_0_0)
-                            .addGap(18, 18, 18)
-                            .addComponent(im_0_1)
-                            .addGap(18, 18, 18)
-                            .addComponent(im_0_2)
-                            .addGap(18, 18, 18)
-                            .addComponent(im_0_3))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(im_3_0)
+                                .addGap(18, 18, 18)
+                                .addComponent(im_3_1)
+                                .addGap(18, 18, 18)
+                                .addComponent(im_3_2)
+                                .addGap(18, 18, 18)
+                                .addComponent(im_3_3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(im_2_0)
+                                .addGap(18, 18, 18)
+                                .addComponent(im_2_1)
+                                .addGap(18, 18, 18)
+                                .addComponent(im_2_2)
+                                .addGap(18, 18, 18)
+                                .addComponent(im_2_3)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(im_1_0)
+                                .addGap(18, 18, 18)
+                                .addComponent(im_1_1)
+                                .addGap(18, 18, 18)
+                                .addComponent(im_1_2)
+                                .addGap(18, 18, 18)
+                                .addComponent(im_1_3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(im_0_0)
+                                .addGap(18, 18, 18)
+                                .addComponent(im_0_1)
+                                .addGap(18, 18, 18)
+                                .addComponent(im_0_2)
+                                .addGap(18, 18, 18)
+                                .addComponent(im_0_3)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(im_0_3)
                     .addComponent(im_0_1)
@@ -235,7 +240,7 @@ public abstract class FrmCliente extends javax.swing.JFrame {
                     .addComponent(im_3_1)
                     .addComponent(im_3_0)
                     .addComponent(im_3_2))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
@@ -260,5 +265,6 @@ public abstract class FrmCliente extends javax.swing.JFrame {
     protected static javax.swing.JLabel im_3_1;
     protected static javax.swing.JLabel im_3_2;
     protected static javax.swing.JLabel im_3_3;
+    protected static javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
