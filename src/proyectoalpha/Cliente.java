@@ -105,7 +105,7 @@ public class Cliente extends FrmCliente {
                         //s.receive(messageIn);
                         //monstruo= (new String(messageIn.getData())).getBytes();
                         System.out.println("El ganador fue: " + new String(monstruo).replace("Finalizo: ", ""));
-                        JOptionPane.showMessageDialog(null, "El ganador fue: " + new String(monstruo).replace("Finalizo: ", ""));
+                        JOptionPane.showMessageDialog(null, "El ganador fue: " + new String(monstruo).replace("Finalizo: ", "").trim());
                         JOptionPane.showMessageDialog(null, "Comienza un nuevo juego ");
                         //System.exit(0);
                     } else {
