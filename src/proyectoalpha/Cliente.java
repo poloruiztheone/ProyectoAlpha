@@ -84,7 +84,7 @@ public class Cliente extends FrmCliente {
             s.joinGroup(group);
 
             // Mientras no haya finalizado el juego
-            while (!juegoFinalizado) {
+            while (true) {
 
 //	    	DatagramPacket messageOut = new DatagramPacket(m, m.length, group, 6789);
                 DatagramPacket messageIn = new DatagramPacket(mensaje, mensaje.length);
@@ -100,13 +100,14 @@ public class Cliente extends FrmCliente {
                     // Si el juego termino el servidor manda mensaje "Finalizo" y el ganador
                     
                     if (new String(monstruo).contains("Finalizo:")) {
-                        juegoFinalizado = true;
+                        //juegoFinalizado = true;
                         // Escuchar quien gano y desplegar el mensaje adecuado en la interfaz
                         //s.receive(messageIn);
                         //monstruo= (new String(messageIn.getData())).getBytes();
                         System.out.println("El ganador fue: " + new String(monstruo).replace("Finalizo: ", ""));
-                        //JOptionPane.showMessageDialog(null, "El ganador fue: " + new String(monstruo).replace("Finalizo: ", ""));
-                        System.exit(0);
+                        JOptionPane.showMessageDialog(null, "El ganador fue: " + new String(monstruo).replace("Finalizo: ", ""));
+                        JOptionPane.showMessageDialog(null, "Comienza un nuevo juego ");
+                        //System.exit(0);
                     } else {
 
                         //Dibuja un monstruo en la posicion recibida por el servidor
@@ -120,7 +121,7 @@ public class Cliente extends FrmCliente {
                 }
             }
             // Salir del grupo
-            s.leaveGroup(group);
+            //s.leaveGroup(group);
         } catch (SocketException e) {
             System.out.println("Socket: " + e.getMessage());
         } catch (IOException e) {

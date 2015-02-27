@@ -21,6 +21,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static proyectoalpha.Servidor.lock;
 
 /**
  *
@@ -49,7 +50,7 @@ public class Servidor {
             long tiempoInicio = System.currentTimeMillis();
             long tiempoActual = System.currentTimeMillis();
             int tiempoEsperaSegundos = 10;
-            
+            /*
             HiloConexionInicial hci = new HiloConexionInicial();
             hci.start();
             while((tiempoActual - tiempoInicio) < (tiempoEsperaSegundos * 1000)){
@@ -57,6 +58,7 @@ public class Servidor {
                 // dar tiempo a que se conecten los jugadores
                 if (!hci.isAlive()){
                     Connection.jugadores.add(hci.jugador);
+                    Connection.puntuacion.add(0);
                     hci = new HiloConexionInicial();
                     hci.start();
                 }
@@ -65,11 +67,11 @@ public class Servidor {
                 Thread.sleep(1000);
             }
             hci.join(100);
-            hci.closeAll();
-            System.out.println(Connection.jugadores.size());
-            for (int i = 0; i < Connection.jugadores.size(); i++){
-                Connection.puntuacion.add(0);
-            }
+            hci.closeAll();*/
+            //System.out.println(Connection.jugadores.size());
+            //for (int i = 0; i < Connection.jugadores.size(); i++){
+            //    Connection.puntuacion.add(0);
+            //}
             // ----------------------------------------------------
             
             // Unirse al grupo Multicast.
@@ -89,10 +91,16 @@ public class Servidor {
             Connection c = null; 
             //Antes de instaciar Connection se tiene que llenar el arreglo de jugadores y de puntuacion
      
-            final int CANTIDAD_MONSTRUOS = 5;
-            int contador = 0;
+            HiloConexionInicial hci = new HiloConexionInicial();
+            hci.start();
+            int N = 3;
+            boolean ganador = false;
+            int indice_ganador = -1;
+
             // Siempre esta en ejecucion.
-            while(contador < CANTIDAD_MONSTRUOS) {
+            while(true) {
+
+               
                 //System.out.println("Waiting for messages");   
                 /*UDP*/        
                 DatagramPacket messageIn = new DatagramPacket(buffer, buffer.length);
@@ -131,48 +139,46 @@ public class Servidor {
                         c.start();
                         sc = ssc.accept();
                    }
+                   for (int i = 0; i < Connection.puntuacion.size(); i++){
+                        System.out.println(Connection.jugadores.get(i) + " le pego a " + Connection.puntuacion.get(i));
+                        if  (Connection.puntuacion.get(i) == N)
+                        {
+                            indice_ganador = i;
+                            ganador = true;
+                        }
+                   }
+                                      
+                   if (ganador){
+                         messageIn = new DatagramPacket(buffer, buffer.length);
+                        String enviar = "Finalizo: ";
+                        enviar += Connection.jugadores.get(indice_ganador);
+                        monstruo = enviar.getBytes();
+                        messageOut = new DatagramPacket(monstruo, monstruo.length, group, 6789);
+                        s.send(messageOut);
+                        // Como es multicast, lo que esta enviando lo escuchan todos, es decir, se escucha a si mismo tambien.
+                        // Por eso ponemos esto (aunque no se utilice el mensaje).
+                        s.receive(messageIn);
+
+                        System.out.println(new String(messageOut.getData()));   
+                        ganador = false;
+                        lock.lock();
+                        for (int i = 0; i < Connection.puntuacion.size(); i++){
+                            Connection.puntuacion.set(i, 0);
+                        }
+                        lock.unlock();
+                        
+                   }
+                   
                    Thread.sleep(3000);
+
+                   
                    //System.out.println("Aqui se debe enviar, quien le pego primero y el score");
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                contador++;
   	     }
-            //Cuando se sale del while se terminaba la ejecucion sin escuchar la ultima respuesta 
-            //Por eso agregue de nuevo el escuchador
-            lock.lock();
-            Connection.isFirst = true; 
-            lock.unlock();
-            sc = ssc.accept();
-            while(sc!=null){
-                //System.out.println("Received an incoming connection from " + sc.socket().getRemoteSocketAddress());                    
-                c = new Connection(sc.socket());
-                c.start();
-                sc = ssc.accept();
-            }
-            c.join();
-            //----------------------
-            int indice_ganador = 0;
-            for (int i = 0; i < Connection.puntuacion.size(); i++){
-                System.out.println(Connection.jugadores.get(i) + " le pego a " + Connection.puntuacion.get(i));
-                if  (Connection.puntuacion.get(i) > Connection.puntuacion.get(indice_ganador))
-                {
-                    indice_ganador = i;
-                }
-            }
-            
-            
-            DatagramPacket messageIn = new DatagramPacket(buffer, buffer.length);
-            String enviar = "Finalizo: ";
-            enviar += Connection.jugadores.get(indice_ganador);
-            byte [] monstruo = enviar.getBytes();
-            DatagramPacket messageOut = new DatagramPacket(monstruo, monstruo.length, group, 6789);
-            s.send(messageOut);
-            // Como es multicast, lo que esta enviando lo escuchan todos, es decir, se escucha a si mismo tambien.
-            // Por eso ponemos esto (aunque no se utilice el mensaje).
-            s.receive(messageIn);
 
-            System.out.println(new String(messageOut.getData()));            
+         
 
         }
          catch (SocketException e){
@@ -180,9 +186,7 @@ public class Servidor {
 	 }
          catch (IOException e){
              System.out.println("IO: " + e.getMessage());
-         } catch (InterruptedException ex) { 
-              Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
-          } 
+         }  
         // Cerrar el socket Multicast
 	 finally {
             if(s != null) s.close();
@@ -214,31 +218,46 @@ class HiloConexionInicial extends Thread {
             @Override
             public void run(){
                 int pos= 0;
-                try {	
-                    ssc = ServerSocketChannel.open();
-                    ssc.socket().bind(new InetSocketAddress(serverPort));
-                    ssc.configureBlocking(true); //Estamos esperando que se conecte un jugador
-                    sc = ssc.accept();
-                    
-                    clientSocket = sc.socket();
-                    
-                    in = new DataInputStream(clientSocket.getInputStream());
-                    out =new DataOutputStream(clientSocket.getOutputStream());
-                    // Aqui falta decidir quien le pego primero al monstruo para decirles si le pegaron o no (feedback al usuario)
-                    String data = in.readUTF();
-                    // Llega el mensaje y lo imprime
-                    System.out.println("Desde: " + clientSocket.getRemoteSocketAddress()+ " se conecto "+ data);
-                    jugador = data;
-                } 
-                catch(EOFException e) {
-                    System.out.println("EOF HiloConexionInicial:"+e.getMessage());
-                } 
-                catch(IOException e) {
-                    System.out.println("IO HiloConexionInicial:"+e.getMessage());
-                } 
-                // Cerrar socket TCP
-                finally {
-                    closeAll();
+                while(true){
+                    try {	
+
+                   // hci.join(100);
+                    //hci.closeAll();
+
+                        ssc = ServerSocketChannel.open();
+                        ssc.socket().bind(new InetSocketAddress(serverPort));
+                        ssc.configureBlocking(true); //Estamos esperando que se conecte un jugador
+                        sc = ssc.accept();
+
+                        clientSocket = sc.socket();
+
+                        in = new DataInputStream(clientSocket.getInputStream());
+                        out =new DataOutputStream(clientSocket.getOutputStream());
+                        // Aqui falta decidir quien le pego primero al monstruo para decirles si le pegaron o no (feedback al usuario)
+                        String data = in.readUTF();
+                        // Llega el mensaje y lo imprime
+                        System.out.println("Desde: " + clientSocket.getRemoteSocketAddress()+ " se conecto "+ data);
+                        jugador = data;
+
+                        lock.lock();
+                        Connection.jugadores.add(jugador);
+                        Connection.puntuacion.add(0);
+                        lock.unlock();
+                        
+                        Thread.sleep(1000);
+                    } 
+                    catch(EOFException e) {
+                        System.out.println("EOF HiloConexionInicial:"+e.getMessage());
+                    } 
+                    catch(IOException e) {
+                        System.out.println("IO HiloConexionInicial:"+e.getMessage());
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(HiloConexionInicial.class.getName()).log(Level.SEVERE, null, ex);
+                    } 
+                    // Cerrar socket TCP
+                    finally {
+                        closeAll();
+                    }
                 }
             }
             
