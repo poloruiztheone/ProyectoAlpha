@@ -38,7 +38,8 @@ public class Servidor {
         String PosMonstruo=null;
         byte[] buffer = new byte[1000];
         // Para TCP
-        int serverPort = 7896; 
+        int serverPort = 7896;
+        int portMulticast = 6788;
         ServerSocketChannel ssc = null;
         
    	try {
@@ -75,8 +76,8 @@ public class Servidor {
             // ----------------------------------------------------
             
             // Unirse al grupo Multicast.
-            InetAddress group = InetAddress.getByName("228.5.6.7"); // destination multicast group 
-            s = new MulticastSocket(6789);
+            InetAddress group = InetAddress.getByName("228.5.6.10"); // destination multicast group 
+            s = new MulticastSocket(portMulticast);
             s.joinGroup(group); 
             buffer = new byte[1000];
            
@@ -108,8 +109,9 @@ public class Servidor {
                 /* Mandar un nuevo monstruo. */
                 // Obtener posicion aleatoria para el monstruo
                 PosMonstruo = posicionAleatoria();
-                byte [] monstruo = PosMonstruo.getBytes();
-                DatagramPacket messageOut = new DatagramPacket(monstruo,monstruo.length, group, 6789);
+                byte [] monstruo = new byte[1000];
+                monstruo = PosMonstruo.getBytes();
+                DatagramPacket messageOut = new DatagramPacket(monstruo,monstruo.length, group, portMulticast);
                 s.send(messageOut);
                 // Como es multicast, lo que esta enviando lo escuchan todos, es decir, se escucha a si mismo tambien.
                 // Por eso ponemos esto (aunque no se utilice el mensaje).
@@ -152,8 +154,9 @@ public class Servidor {
                          messageIn = new DatagramPacket(buffer, buffer.length);
                         String enviar = "Finalizo: ";
                         enviar += Connection.jugadores.get(indice_ganador);
+                        monstruo = new byte[1000];
                         monstruo = enviar.getBytes();
-                        messageOut = new DatagramPacket(monstruo, monstruo.length, group, 6789);
+                        messageOut = new DatagramPacket(monstruo, monstruo.length, group, portMulticast);
                         s.send(messageOut);
                         // Como es multicast, lo que esta enviando lo escuchan todos, es decir, se escucha a si mismo tambien.
                         // Por eso ponemos esto (aunque no se utilice el mensaje).
@@ -166,7 +169,7 @@ public class Servidor {
                             Connection.puntuacion.set(i, 0);
                         }
                         lock.unlock();
-                        
+                        Thread.sleep(3000);
                    }
                    
                    Thread.sleep(3000);

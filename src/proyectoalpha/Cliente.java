@@ -58,6 +58,7 @@ public class Cliente extends FrmCliente {
         byte[] mensaje = new byte[1000];
         byte[] monstruo;
         boolean juegoFinalizado = false;
+        int portMulticast = 6788;
 
         // Variables Multicast
         MulticastSocket s = null;
@@ -79,14 +80,14 @@ public class Cliente extends FrmCliente {
         try {
             /*UDP*/
             // Unirse al grupo Multicast
-            InetAddress group = InetAddress.getByName("228.5.6.7"); // destination multicast group 
-            s = new MulticastSocket(6789);
+            InetAddress group = InetAddress.getByName("228.5.6.10"); // destination multicast group 
+            s = new MulticastSocket(portMulticast);
             s.joinGroup(group);
 
             // Mientras no haya finalizado el juego
             while (true) {
-
-//	    	DatagramPacket messageOut = new DatagramPacket(m, m.length, group, 6789);
+                mensaje = new byte[1000];
+//	    	DatagramPacket messageOut = new DatagramPacket(m, m.length, group, portMulticast);
                 DatagramPacket messageIn = new DatagramPacket(mensaje, mensaje.length);
 
                 /* Escuchar y recibir un monstruo*/
